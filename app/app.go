@@ -108,7 +108,6 @@ import (
 	"github.com/babylonlabs-io/babylon/x/checkpointing"
 	checkpointingtypes "github.com/babylonlabs-io/babylon/x/checkpointing/types"
 	"github.com/babylonlabs-io/babylon/x/epoching"
-	epochingkeeper "github.com/babylonlabs-io/babylon/x/epoching/keeper"
 	epochingtypes "github.com/babylonlabs-io/babylon/x/epoching/types"
 	"github.com/babylonlabs-io/babylon/x/finality"
 	finalitytypes "github.com/babylonlabs-io/babylon/x/finality/types"
@@ -508,8 +507,9 @@ func NewBabylonApp(
 
 	anteHandler := sdk.ChainAnteDecorators(
 		NewWrappedAnteHandler(authAnteHandler),
-		epochingkeeper.NewDropValidatorMsgDecorator(app.EpochingKeeper),
+		// epochingkeeper.NewDropValidatorMsgDecorator(app.EpochingKeeper),
 		NewBtcValidationDecorator(btcConfig, &app.BtcCheckpointKeeper),
+		NewWrapStakingMsgDecorator(&app.EpochingKeeper, encCfg),
 	)
 
 	// set proposal extension
