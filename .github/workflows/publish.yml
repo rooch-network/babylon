@@ -5,6 +5,7 @@ on:
     branches:
     - 'main'
     - 'dev'
+    - 'chore/Add-log-unbonding-output-build'
     tags:
     - '*'
 
