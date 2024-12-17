@@ -51,6 +51,8 @@ and module account vars in appparams
 
 - [#324](https://github.com/babylonlabs-io/babylon/pull/324) Fix decrementing
 jailed fp counter
+- [#353](https://github.com/babylonlabs-io/babylon/pull/353) Bump to SDK
+  0.50.11
 
 ### State Machine Breaking
 
