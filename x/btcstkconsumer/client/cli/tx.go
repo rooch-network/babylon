@@ -33,7 +33,7 @@ func GetTxCmd() *cobra.Command {
 func NewRegisterConsumerCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "register-consumer <consumer-id> <name> <contract-address> [description]",
-		Args:  cobra.RangeArgs(2, 3),
+		Args:  cobra.RangeArgs(3, 4),
 		Short: "Registers a CZ consumer",
 		Long: strings.TrimSpace(
 			`Registers a CZ consumer.`,
