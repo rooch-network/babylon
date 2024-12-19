@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strings"
 
 	errorsmod "cosmossdk.io/errors"
 	"github.com/babylonlabs-io/babylon/x/btcstkconsumer/types"
@@ -33,7 +34,7 @@ func (ms msgServer) RegisterConsumer(ctx context.Context, req *types.MsgRegister
 		return nil, err
 	}
 
-	if len(req.EthL2FinalityContractAddress) > 0 {
+	if len(req.EthL2FinalityContractAddress) > 0 || strings.HasPrefix(req.ConsumerId, "rooch") || strings.HasPrefix(req.ConsumerId, "op") {
 		// this is a ETH L2 consumer
 
 		// ensure the ETH L2 finality contract exists
