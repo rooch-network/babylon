@@ -32,7 +32,7 @@ func GetTxCmd() *cobra.Command {
 
 func NewRegisterConsumerCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "register-consumer <consumer-id> <name> [description]",
+		Use:   "register-consumer <consumer-id> <name> <contract-address> [description]",
 		Args:  cobra.RangeArgs(2, 3),
 		Short: "Registers a CZ consumer",
 		Long: strings.TrimSpace(
@@ -53,16 +53,21 @@ func NewRegisterConsumerCmd() *cobra.Command {
 			if name == "" {
 				return fmt.Errorf("consumer's name cannot be empty")
 			}
+			contractAddress := args[2]
+			//if contractAddress == "" {
+			//	return fmt.Errorf("consumer's contractAddress cannot be empty")
+			//}
 			description := ""
-			if len(args) == 3 {
-				description = args[2]
+			if len(args) == 4 {
+				description = args[3]
 			}
 
 			msg := types.MsgRegisterConsumer{
-				Signer:              clientCtx.FromAddress.String(),
-				ConsumerId:          consumerId,
-				ConsumerName:        name,
-				ConsumerDescription: description,
+				Signer:                       clientCtx.FromAddress.String(),
+				ConsumerId:                   consumerId,
+				ConsumerName:                 name,
+				ConsumerDescription:          description,
+				EthL2FinalityContractAddress: contractAddress,
 			}
 
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), &msg)
