@@ -57,7 +57,7 @@ func NewRegisterConsumerCmd() *cobra.Command {
 			//if contractAddress == "" {
 			//	return fmt.Errorf("consumer's contractAddress cannot be empty")
 			//}
-			description := ""
+			description := name
 			if len(args) == 4 {
 				description = args[3]
 			}
